@@ -32,7 +32,7 @@ public abstract class BaseTest extends BasePage {
             capabilities.setCapability("enableVideo", false);
             try {
                 driver = new RemoteWebDriver(
-                        URI.create(ConfigPage.getProperty("base_url")).toURL(),
+                        URI.create(ConfigPage.getProperty("selenoid.url")).toURL(),
                         capabilities
                 );
             } catch (MalformedURLException e) {
