@@ -27,7 +27,7 @@ public abstract class BaseTest extends BasePage {
             // Конфигурация для Selenoid
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName("chrome");
-            capabilities.setVersion("100.0");
+            capabilities.setVersion("109.0");
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", false);
             try {
