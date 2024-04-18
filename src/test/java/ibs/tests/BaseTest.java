@@ -48,7 +48,7 @@ public abstract class BaseTest extends BasePage {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         BasePage.setDriver(driver);
-        driver.get(ConfigPage.getProperty("base_url"));
+        driver.get(ConfigPage.getProperty("selenoid.url"));
     }
 
     @AfterAll
