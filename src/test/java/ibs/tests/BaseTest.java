@@ -26,7 +26,7 @@ public abstract class BaseTest extends BasePage {
         if (Boolean.parseBoolean(useSelenoid)) {
             // Конфигурация для Selenoid
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName("chrome");
+            capabilities.setBrowserName("firefox");
             capabilities.setVersion("109.0");
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", false);
