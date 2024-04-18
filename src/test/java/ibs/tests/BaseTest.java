@@ -1,12 +1,13 @@
 package ibs.tests;
 
+import ibs.pages.BasePage;
+import ibs.pages.ConfigPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import ibs.pages.BasePage;
-import ibs.pages.ConfigPage;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -14,20 +15,22 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.time.Duration;
 
-
 public abstract class BaseTest extends BasePage {
     protected static WebDriver driver;
 
     @BeforeAll
     public static void setUp() {
-        // Проверяем, следует ли использовать Selenoid
-        String useSelenoid = System.getProperty("useSelenoid", "true");
+        String browserType = System.getProperty("browser", "chrome");  // Дефолтное значение - Chrome
+        String useSelenoid = System.getProperty("useSelenoid", "false");  // По умолчанию не использовать Selenoid
 
         if (Boolean.parseBoolean(useSelenoid)) {
-            // Конфигурация для Selenoid
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName("firefox");
-            capabilities.setVersion("109.0");
+            capabilities.setBrowserName(browserType);
+            if (browserType.equals("firefox")) {
+                capabilities.setVersion("109.0");  // Указываем версию для Firefox
+            } else {
+                capabilities.setVersion("109.0");  // Указываем версию для Chrome
+            }
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", false);
             try {
@@ -39,9 +42,13 @@ public abstract class BaseTest extends BasePage {
                 throw new RuntimeException(e);
             }
         } else {
-            // Локальный запуск через ChromeDriver
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
+            if (browserType.equals("firefox")) {
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+            } else {
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+            }
         }
 
         driver.manage().window().maximize();
@@ -59,4 +66,3 @@ public abstract class BaseTest extends BasePage {
         }
     }
 }
-
