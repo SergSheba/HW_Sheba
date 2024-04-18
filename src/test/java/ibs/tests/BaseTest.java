@@ -53,7 +53,10 @@ public abstract class BaseTest extends BasePage {
 
     @AfterAll
     public static void tearDown() {
-        driver.close();
-        driver.quit();
+        if (driver != null) {
+            driver.close();
+            driver.quit();
+        }
     }
 }
+
