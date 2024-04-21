@@ -22,7 +22,7 @@ public class BaseTestDb {
     }
 
     protected static Connection getNewConnection() throws SQLException {
-        return DriverManager.getConnection(ConfigPage.getProperty("selenoid.url.db"),
+        return DriverManager.getConnection(ConfigPage.getProperty("db_url"),
                 ConfigPage.getProperty("db_login"), ConfigPage.getProperty("db_password"));
     }
 }
