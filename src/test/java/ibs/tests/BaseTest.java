@@ -24,7 +24,7 @@ public abstract class BaseTest extends BasePage {
         if ("remote".equalsIgnoreCase(ConfigPage.getProperty("type_driver"))) {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(ConfigPage.getProperty("type_browser"));
-            capabilities.setVersion("109.0");
+            capabilities.setVersion("108.0");
             capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                     "enableVNC", true,
                     "enableVideo", false
